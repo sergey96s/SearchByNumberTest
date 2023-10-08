@@ -13,12 +13,17 @@ private SelenideElement freeSearchButton = $(MobileBy.id("ru.vin.proverka.auto:i
     private SelenideElement nBarGosNumber = $(MobileBy
            .xpath("//android.widget.FrameLayout[@content-desc=\"Гос. номер\"] /android.widget.FrameLayout/android.widget.ImageView"));
     private SelenideElement paidButton = $(MobileBy.id("ru.vin.proverka.auto:id/paid_search_button"));
+
+    private SelenideElement nextButton = $(MobileBy.id("ru.vin.proverka.auto:id/nextButton"));
+    public void clickNextButton() {
+        nextButton.click();
+    }
+    public boolean nextButtonCheck(){
+              return nextButton.isEnabled();
+    }
     public void setSearchFieldGosNumber(SelenideElement searchFieldGosNumber) {
         this.searchFieldGosNumber = searchFieldGosNumber;
     }
-
-
-
    public void clickNBarGNumber(){
        nBarGosNumber.click();
    }

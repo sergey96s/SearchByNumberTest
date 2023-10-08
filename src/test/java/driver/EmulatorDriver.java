@@ -51,7 +51,6 @@ public abstract class EmulatorDriver implements WebDriverProvider {
 
 
     @Nonnull
-    @Override
     public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
         initPackageAndActivity();
         desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
