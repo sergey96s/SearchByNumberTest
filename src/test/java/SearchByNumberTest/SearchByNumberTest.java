@@ -9,9 +9,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static io.appium.java_client.MobileBy.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SearchByNumberTest extends BaseTest {
     MainPage mainPage = new MainPage();
@@ -22,23 +24,23 @@ public class SearchByNumberTest extends BaseTest {
     public void paidButtonEnabledCheck(){
         mainPage.clickNBarGNumber();
         emulatorHelper.sendKeysAndFind($(id("ru.vin.proverka.auto:id/carNumberCodeEditText")),"А001АА01");
-        Assertions.assertTrue(mainPage.paidButtonEnabled(), "Кнопка База 'ГИБДД - Платно' неактивна");
+        assertTrue(mainPage.paidButtonEnabled(), "Кнопка База 'ГИБДД - Платно' неактивна");
     }
     @ParameterizedTest(name = "#{index} - проверка на валидность формата номера {0}")
     @CsvSource({"1234АА54", "А123АА54", "А123АА154"})
     @DisplayName("Проверка на валидность форматов номеров")
-    public void enterInvalidBussinesEmail(String number) {
-        emulatorHelper.sendKeysAndFind(nBarFines.setGosNumberEditText(String), number);
-        assertEquals(!nBarFines.getErrorTextView().isDisplayed(), "Введите гос.номер полностью с кодом региона. Например: В234ЕУ77"
-                , "Сообщение о необходимости ввести корректный номер получено");
+    public void enterValidGosNumber(String number) {
+        nBarFines.nBarFinesButtonClick();
+        emulatorHelper.sendKeysAndFind(nBarFines.getGosNumberEditText(), number);
+        nBarFines.getErrorTextView().shouldNotBe(visible);
     }
     @ParameterizedTest(name = "#{index} - проверка на невалидность формата номера {0}")
-    @CsvSource({"1А34АА54", "АА123АА5", "F123RЦ154"})
+    @CsvSource({"1А34А54", "АА123АА", "F123154"})
     @DisplayName("Проверка на невалидность форматов номеров")
-    public void enterInvalidBussinesEmail(String number) {
-        emulatorHelper.sendKeysAndFind(nBarFines.setGosNumberEditText(), number);
-        assertEquals(nBarFines.getErrorTextView(), "Введите гос.номер полностью с кодом региона. Например: В234ЕУ77"
-                , "Сообщение о необходимости ввести корректный номер не получено");
+    public void enterInvalidGosNumber(String number) {
+        nBarFines.nBarFinesButtonClick();
+        emulatorHelper.sendKeysAndFind(nBarFines.getGosNumberEditText(), number);
+        nBarFines.getErrorTextView().shouldBe(visible);
     }
 
 }

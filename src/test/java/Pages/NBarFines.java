@@ -13,12 +13,15 @@ public class NBarFines {
     private SelenideElement checkButton = $(id("ru.vin.proverka.auto:id/checkButton"));
 
     private SelenideElement errorTextView = $(id("ru.vin.proverka.auto:id/errorTextView"));
+
     public SelenideElement getErrorTextView() {
         return errorTextView;
     }
+
     public void setGosNumberEditText(SelenideElement gosNumberEditText) {
         this.gosNumberEditText = gosNumberEditText;
     }
+
 
     public void setStsCodeEditText(SelenideElement stsCodeEditText) {
         this.stsCodeEditText = stsCodeEditText;
@@ -27,9 +30,13 @@ public class NBarFines {
     public void setCheckButton(SelenideElement checkButton) {
         this.checkButton = checkButton;
     }
-   public void nBarFinesButtonClick(){
+
+    public void nBarFinesButtonClick() {
         nBarFinesButton.click();
-   }
+    }
 
 
+    public SelenideElement getGosNumberEditText() {
+        return gosNumberEditText;
+    }
 }
