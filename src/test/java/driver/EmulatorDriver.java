@@ -58,17 +58,10 @@ public class EmulatorDriver implements WebDriverProvider {
         UiAutomator2Options options = new UiAutomator2Options();
         options.merge(capabilities);
         options.setApp(getAbsolutePath(APP));
-        // options.setAppPackage();
-        // options.setAppActivity();
         options.setNewCommandTimeout(Duration.ofSeconds(11));
         options.setFullReset(false);
         driver = new AndroidDriver(getUrl(), options);
         return driver;
     }
 
-
-//    @Nonnull
-//    public WebDriver createDriver(@Nonnull Capabilities capabilities) {
-//        return driver;
-//    }
 }
